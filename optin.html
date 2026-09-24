@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SMS Opt-In Process — Clinic Appointment Assistant</title>
+<meta name="description" content="Documentation of how end users consent to receive SMS messages from the Clinic Appointment Assistant, including the web opt-in form and the verbal disclosure script.">
+<style>
+  :root { --ink:#1a1a1a; --muted:#5b6270; --line:#e5e7eb; --accent:#c8102e; --ok:#16a34a; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#fff; color:var(--ink);
+         font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,sans-serif; }
+  .wrap { max-width:760px; margin:0 auto; padding:48px 20px 80px; }
+  h1 { font-size:28px; margin:0 0 6px; }
+  .sub { color:var(--muted); margin:0 0 32px; font-size:15px; }
+  h2 { font-size:19px; margin:40px 0 12px; padding-top:20px; border-top:1px solid var(--line); }
+  h3 { font-size:15px; margin:24px 0 8px; color:var(--muted);
+       text-transform:uppercase; letter-spacing:.04em; }
+  p, li { color:#2b3038; }
+  ul { padding-left:22px; }
+  code { background:#f4f4f5; padding:2px 6px; border-radius:4px; font-size:14px; }
+  a { color:var(--accent); }
+
+  /* Phone mockup showing the real consent exchange */
+  .phone { max-width:360px; margin:18px 0; border:1px solid var(--line);
+           border-radius:18px; overflow:hidden; background:#f7f7f8; }
+  .phone-bar { background:#fff; border-bottom:1px solid var(--line);
+               padding:10px 14px; font-size:13px; color:var(--muted); text-align:center; }
+  .chat { padding:14px; }
+  .bub { max-width:84%; padding:10px 13px; border-radius:16px; margin-bottom:10px;
+         font-size:14px; line-height:1.45; }
+  .them { background:#fff; border:1px solid var(--line); border-bottom-left-radius:5px; }
+  .me { background:#c8102e; color:#fff; margin-left:auto; border-bottom-right-radius:5px; }
+
+  /* The live opt-in form */
+  .form { border:1px solid var(--line); border-radius:12px; padding:22px; margin:18px 0;
+          background:#fff; max-width:460px; }
+  label.f { display:block; font-weight:600; font-size:14px; margin:14px 0 6px; }
+  input[type=text], input[type=tel] { width:100%; padding:12px; font-size:16px;
+       border:1px solid var(--line); border-radius:8px; font-family:inherit; }
+  .consent { display:flex; gap:12px; align-items:flex-start; margin:18px 0;
+             padding:14px; background:#fafafa; border-radius:8px; border:1px solid var(--line); }
+  .consent input { width:22px; height:22px; flex:0 0 auto; margin-top:2px; }
+  .consent span { font-size:13px; line-height:1.5; color:#2b3038; }
+  button { width:100%; padding:14px; font-size:16px; font-weight:700; color:#fff;
+           background:var(--accent); border:0; border-radius:10px; cursor:pointer; }
+  .note { background:#f0fdf4; border-left:3px solid var(--ok); padding:14px 16px;
+          border-radius:6px; margin:18px 0; font-size:14px; }
+  .unchecked { font-size:13px; color:var(--muted); margin-top:8px; }
+  footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--line);
+           color:var(--muted); font-size:14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>SMS Opt-In Process</h1>
+  <p class="sub">
+    Clinic Appointment Assistant · operated by Marcos Bosche · Austin, Texas<br>
+    Documentation of how end users give consent to receive text messages.
+  </p>
+
+  <p>
+    This page documents every way an end user can consent to receive SMS messages from
+    the <strong>Clinic Appointment Assistant</strong>, operated by <strong>Marcos
+    Bosche</strong>. There are two opt-in paths, both shown below. Both require active,
+    affirmative consent. Nothing is pre-checked, and consent is never bundled with
+    anything else.
+  </p>
+
+  <h2>Opt-in path 1 — Web form</h2>
+  <p>
+    Patients can request appointment text messages using the form below. The consent
+    checkbox is <strong>unchecked by default</strong> and the form cannot be submitted
+    without checking it.
+  </p>
+
+  <div class="form">
+    <h3 style="margin-top:0">Request appointment text messages</h3>
+    <form method="POST" action="#" onsubmit="event.preventDefault(); document.getElementById('done').style.display='block';">
+      <label class="f" for="nm">Full name</label>
+      <input type="text" id="nm" name="name" autocomplete="name">
+
+      <label class="f" for="ph">Mobile phone number</label>
+      <input type="tel" id="ph" name="phone" autocomplete="tel" placeholder="(512) 555-0134">
+
+      <label class="consent">
+        <input type="checkbox" name="sms_consent" required>
+        <span>
+          I agree to receive appointment text messages from <strong>Clinic Appointment
+          Assistant</strong> at the number provided. Messages are about my own
+          appointment only. <strong>Message and data rates may apply. Message frequency
+          varies.</strong> Reply <strong>STOP</strong> to cancel or <strong>HELP</strong>
+          for help. See the
+          <a href="./privacy.html">Privacy Policy</a> and
+          <a href="./terms.html">Terms &amp; Conditions</a>.
+          Consent is not a condition of receiving care.
+        </span>
+      </label>
+
+      <button type="submit">Sign up for appointment texts</button>
+      <p class="unchecked">The consent box above is unchecked by default. Active consent is required.</p>
+    </form>
+    <div id="done" style="display:none" class="note">
+      Thank you. You are now subscribed to appointment text messages. Reply STOP to cancel.
+    </div>
+  </div>
+
+  <h2>Opt-in path 2 — Verbal, during a phone call or WhatsApp conversation</h2>
+  <p>
+    Most patients schedule by phone or WhatsApp. When they do, the scheduling assistant
+    asks for consent out loud before storing the number. The exact wording is scripted and
+    identical every time. This is the disclosure end users hear:
+  </p>
+
+  <h3>English script</h3>
+  <div class="phone">
+    <div class="phone-bar">Clinic Appointment Assistant · (512) 883-4184</div>
+    <div class="chat">
+      <div class="bub me">I'd like to book an appointment for tomorrow morning.</div>
+      <div class="bub them">
+        I can send your appointment confirmation by text message to this number.
+        Message and data rates may apply. Message frequency varies. Reply STOP to
+        cancel, HELP for help. Our privacy policy and terms are on our website.
+        Is that okay?
+      </div>
+      <div class="bub me">Yes, that's fine.</div>
+      <div class="bub them">
+        Confirmed. You'll get a text with the date, time and address.
+      </div>
+    </div>
+  </div>
+
+  <h3>Spanish script</h3>
+  <div class="phone">
+    <div class="phone-bar">Clinic Appointment Assistant · (512) 883-4184</div>
+    <div class="chat">
+      <div class="bub me">Quiero agendar una cita para mañana en la mañana.</div>
+      <div class="bub them">
+        Te puedo mandar la confirmación de tu cita por mensaje de texto a este número.
+        Pueden aplicar tarifas de mensajes y datos. La frecuencia de mensajes varía.
+        Responde STOP para cancelar, HELP para ayuda. Nuestra política de privacidad
+        y términos están en nuestro sitio web. ¿Está bien?
+      </div>
+      <div class="bub me">Sí, está bien.</div>
+      <div class="bub them">
+        Listo. Te llega un mensaje con el día, la hora y la dirección.
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>The number is stored only after the patient answers yes.</strong> If the
+    patient declines, no messages are sent and the appointment is scheduled normally.
+    Consent is never a condition of receiving care.
+  </div>
+
+  <h2>What subscribers receive</h2>
+  <ul>
+    <li>Confirmation of an appointment they requested</li>
+    <li>Notice if that appointment is rescheduled or cancelled</li>
+    <li>A link to the patient registration form</li>
+    <li>A reminder before the visit</li>
+  </ul>
+  <p>
+    All messages are transactional and relate only to the recipient's own appointment.
+    <strong>No marketing or promotional messages are sent.</strong>
+    <strong>Message and data rates may apply. Message frequency varies.</strong>
+  </p>
+
+  <h3>Example message</h3>
+  <div class="phone">
+    <div class="phone-bar">From (512) 883-4184</div>
+    <div class="chat">
+      <div class="bub them">
+        Cita confirmada - Clinica Hispana Rubymed Austin. Consulta medica general.
+        Jueves 24 de septiembre a las 3:00 PM. Sede Riverside, 2410 E Riverside Dr
+        Suite G-2, Austin TX. Costo: $25. Para cambiarla o cancelarla llame al
+        (512) 271-9357. Responda STOP para no recibir mensajes.
+      </div>
+    </div>
+  </div>
+
+  <h2>How to opt out</h2>
+  <p>
+    Reply <strong><code>STOP</code></strong> to any message to unsubscribe immediately.
+    Reply <strong><code>HELP</code></strong> for assistance. Opting out does not affect
+    the patient's ability to schedule an appointment or receive care.
+  </p>
+
+  <h2>Sourcing of phone numbers</h2>
+  <p>
+    Every number is given directly to us by its owner, for this purpose, through one of
+    the two paths above. We do not purchase, rent, lease, import, or otherwise acquire
+    phone numbers from any third party, and we never message a number that was not given
+    to us directly.
+  </p>
+
+  <h2>Privacy</h2>
+  <p>
+    <strong>No mobile information will be shared with third parties or affiliates for
+    marketing or promotional purposes.</strong> Text messaging originator opt-in data and
+    consent will not be shared with any third parties.
+  </p>
+  <p>
+    Full details: <a href="./privacy.html">Privacy Policy</a> ·
+    <a href="./terms.html">Terms &amp; Conditions</a>
+  </p>
+
+  <footer>
+    <a href="./">Home</a> · <a href="./privacy.html">Privacy Policy</a> ·
+    <a href="./terms.html">Terms &amp; Conditions</a><br>
+    Clinic Appointment Assistant · Marcos Bosche · Austin, Texas ·
+    <a href="mailto:marcos.bosche@nymbl.app">marcos.bosche@nymbl.app</a>
+  </footer>
+
+</div>
+</body>
+</html>
