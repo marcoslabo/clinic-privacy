@@ -71,13 +71,15 @@
   <h2>Opt-in path 1 — Web form</h2>
   <p>
     Patients can request appointment text messages using the form below. The consent
-    checkbox is <strong>unchecked by default</strong> and the form cannot be submitted
-    without checking it.
+    checkbox is <strong>unchecked by default and entirely optional</strong>. The form can be
+    submitted without it, and the appointment is scheduled either way &mdash;
+    <strong>consent to receive messages is never a condition of booking an appointment or
+    receiving care.</strong>
   </p>
 
   <div class="form">
     <h3 style="margin-top:0">Request appointment text messages</h3>
-    <form method="POST" action="#" onsubmit="event.preventDefault(); document.getElementById('done').style.display='block';">
+    <form method="POST" action="#" onsubmit="event.preventDefault(); var c=this.sms_consent.checked; var d=document.getElementById('done'); d.textContent = c ? 'Thank you. You are now subscribed to appointment text messages. Reply STOP at any time to cancel.' : 'Thank you. Your request was submitted. You will not receive text messages.'; d.style.display='block';">
       <label class="f" for="nm">Full name</label>
       <input type="text" id="nm" name="name" autocomplete="name">
 
@@ -85,10 +87,10 @@
       <input type="tel" id="ph" name="phone" autocomplete="tel" placeholder="(512) 555-0134">
 
       <label class="consent">
-        <input type="checkbox" name="sms_consent" required>
+        <input type="checkbox" name="sms_consent">
         <span>
-          I agree to receive appointment text messages from <strong>Alo</strong> at the
-          number provided. Messages are about my own
+          <strong>Optional.</strong> I agree to receive appointment text messages from
+          <strong>Alo</strong> at the number provided. Messages are about my own
           appointment only. <strong>Message and data rates may apply. Message frequency
           varies.</strong> Reply <strong>STOP</strong> to cancel or <strong>HELP</strong>
           for help. See the
@@ -98,12 +100,10 @@
         </span>
       </label>
 
-      <button type="submit">Sign up for appointment texts</button>
-      <p class="unchecked">The consent box above is unchecked by default. Active consent is required.</p>
+      <button type="submit">Submit</button>
+      <p class="unchecked">The consent box is unchecked by default and optional. You can submit this form without it and still book an appointment.</p>
     </form>
-    <div id="done" style="display:none" class="note">
-      Thank you. You are now subscribed to appointment text messages. Reply STOP to cancel.
-    </div>
+    <div id="done" style="display:none" class="note"></div>
   </div>
 
   <h2>Opt-in path 2 — Verbal, during a phone call or WhatsApp conversation</h2>
@@ -151,8 +151,10 @@
 
   <div class="note">
     <strong>The number is stored only after the patient answers yes.</strong> If the
-    patient declines, no messages are sent and the appointment is scheduled normally.
-    Consent is never a condition of receiving care.
+    patient declines, no messages are sent and the appointment is scheduled exactly the same
+    way. <strong>Consent to receive text messages is never required in order to book an
+    appointment, use the service, or receive care.</strong> Messaging consent is collected
+    separately from anything else and is never bundled with other terms.
   </div>
 
   <h2>What subscribers receive</h2>
